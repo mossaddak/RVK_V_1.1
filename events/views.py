@@ -92,53 +92,62 @@ class EventRegisterViewSet(APIView):
             print(event_register["id"])
 
             TotallRegisterUser = event_for_register.user.all().count()
-            if TotallRegisterUser <= EventCapacity:
-                EventRegisterUser.objects.create(
-                    event = event_for_register,
-                    user = request.user,
-                    first_name = request.data.get('first_name'),
-                    last_name = request.data.get('last_name'),
-                    email = request.data.get('email'),
-                    phone_number = request.data.get('phone_number'),
 
-                    smart_card_number = request.data.get('smart_card_number'),
-                    address = request.data.get('address'),
-
-                    pin_code = request.data.get('pin_code'),
-                    city = request.data.get('pin_code'),
-                    state = request.data.get('state'),
-                    country = request.data.get('country'),
-
-                    amount=event_register["amount"],
-                    payment_id=event_register["id"],
-                    order_date=event_register["created_at"],
-                    is_pay = True
-                )
-
-                event_for_register.user.add(request.user)
-
-                print("all user=================================================",event_for_register.user.all().count())
-
-
-
-                #EventRegisterUser.user.add(user)
+            if request.user in event_for_register.user.all():
 
                 return Response({
-                        "message":"Thank For Registration",
-                        "donation details": int(event_register["amount"])/100,
-                        "amount":event_register["amount"],
-                        "payment_id":event_register["id"],
-                        "order_date":event_register["created_at"],
-                        "is_pay":True
+                        "message":"You already registered for this event."
+                    }
+                
+                )
+            else:
+                if TotallRegisterUser <= EventCapacity:
+                    EventRegisterUser.objects.create(
+                        event = event_for_register,
+                        user = request.user,
+                        first_name = request.data.get('first_name'),
+                        last_name = request.data.get('last_name'),
+                        email = request.data.get('email'),
+                        phone_number = request.data.get('phone_number'),
+
+                        smart_card_number = request.data.get('smart_card_number'),
+                        address = request.data.get('address'),
+
+                        pin_code = request.data.get('pin_code'),
+                        city = request.data.get('pin_code'),
+                        state = request.data.get('state'),
+                        country = request.data.get('country'),
+
+                        amount=event_register["amount"],
+                        payment_id=event_register["id"],
+                        order_date=event_register["created_at"],
+                        is_pay = True
+                    )
+
+                    event_for_register.user.add(request.user)
+
+                    print("all user=================================================",event_for_register.user.all().count())
+
+
+
+                    #EventRegisterUser.user.add(user)
+
+                    return Response({
+                            "message":"Thank For Registration",
+                            "donation details": int(event_register["amount"])/100,
+                            "amount":event_register["amount"],
+                            "payment_id":event_register["id"],
+                            "order_date":event_register["created_at"],
+                            "is_pay":True
+                        }
+                        
+                    )
+                    
+                return Response({
+                        "message":"You can't register at the moment, event registration capacity is already over."
                     }
                     
                 )
-                
-            return Response({
-                    "message":"You can't register at the moment, event registration capacity is already over."
-                }
-                
-            )
         except Exception as e:
              return Response({
                     "message":"somthing wrong with payment",
