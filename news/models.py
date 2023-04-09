@@ -18,6 +18,7 @@ class News(models.Model):
     image = models.ImageField(blank=False, null=True)
     details = RichTextUploadingField(blank=True, null=True)
     news_document = models.FileField(null=True, blank=False, verbose_name="news document")
+    author = models.CharField(max_length=250, null=True)
 
     def __str__(self):
         return f"{self.pk}.{self.title}"

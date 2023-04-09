@@ -36,7 +36,7 @@ class Event(models.Model):
     
 
 class EventRegisterUser(models.Model):
-    #event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user", verbose_name="User")
     
     

@@ -30,6 +30,8 @@ from rest_framework.response import Response
 from accounts.models import(
     User
 )
+from django.shortcuts import get_object_or_404
+
 
 
 
@@ -70,7 +72,16 @@ class EventRegisterViewSet(APIView):
             amount = request.data.get('amount')
             currency = "INR"
 
+
+            event_id = request.data.get('event_id')
+            all_events = Event.objects.all()
+            
+            
+            event_for_register = get_object_or_404(all_events, pk=event_id)
+
             print("Amount type++++++++++++++++++++++++++++++++++++++++++++", type(int(amount)))
+            print("event_for_register++++++++++++++++++++++++++++++++++++++++++++", event_for_register)
+
             
 
             data = {"amount": int(amount)*100, "currency": currency}
@@ -80,6 +91,7 @@ class EventRegisterViewSet(APIView):
 
             if TotallRegisterUser <= EventCapacity:
                 EventRegisterUser.objects.create(
+                    event = event_for_register,
                     user = request.user,
                     first_name = request.data.get('first_name'),
                     last_name = request.data.get('last_name'),

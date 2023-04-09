@@ -10,6 +10,7 @@ class Volunteer(models.Model):
     phone = models.CharField(max_length=25)
     area_of_interest = models.CharField(max_length=30)
     address = models.CharField(max_length=255)
+    age = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return self.name
