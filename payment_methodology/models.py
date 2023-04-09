@@ -15,7 +15,9 @@ class DonationModel(models.Model):
     email = models.CharField(max_length=250, null=True, verbose_name="Email")
     phone_number = models.CharField(max_length=250, null=True, verbose_name="Phone Number")
     address = models.TextField(null=True, verbose_name="Address")
+
     do_you_benifited = models.BooleanField(null=True)
+    
     pin_code = models.CharField(null=True, max_length=250, verbose_name="Pin Code")
     city = models.CharField(null=True, max_length=250, verbose_name="City")
     state = models.CharField(max_length=250, null=True, verbose_name="State")

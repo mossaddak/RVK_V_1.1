@@ -50,7 +50,7 @@ class EventRegisterViewSet(APIView):
 
     def post(self, request):
         TotallRegisterUser = EventRegisterUser.objects.all().count()
-        EventCapacity = Event.objects.first().capacity
+        EventCapacity = Event.objects.last().capacity
 
         
 
