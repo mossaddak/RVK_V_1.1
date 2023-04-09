@@ -9,6 +9,8 @@ User = get_user_model()
 
 
 class Event(models.Model):
+    user = models.ManyToManyField(User, related_name="event_user", blank=True)
+
     event_name = models.CharField(max_length=255, verbose_name="Event Name", null=True)
     host_name = models.CharField(max_length=255, verbose_name="Host Name", null=True)
     
@@ -34,7 +36,9 @@ class Event(models.Model):
     
 
 class EventRegisterUser(models.Model):
+    #event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user", verbose_name="User")
+    
     
     first_name = models.CharField(max_length=250,null=True, verbose_name="First Name")
     last_name = models.CharField(max_length=250, null=True, verbose_name="Last Name")
@@ -51,6 +55,7 @@ class EventRegisterUser(models.Model):
     country = models.CharField(max_length=250, null=True, verbose_name="Country")
 
     #payment details
+    card_details = models.CharField(max_length=20, null=True, blank=False)
     amount = models.CharField(max_length=250, null=True)
     payment_id = models.CharField(max_length=100, null=True)
     order_date = models.DateTimeField(auto_now=True, null=True)

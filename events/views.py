@@ -58,60 +58,73 @@ class EventRegisterViewSet(APIView):
 
         # print("Event=============================================",TotallRegisterUser)
 
-        
+        try:
 
-        eventregister_model = EventRegisterUser.objects.all()
-        serializer = EventRegisterSerializer(eventregister_model, many=True)
-        
-        KEY_ID = "rzp_test_2y68LXTdn3DKK9"
-        KEY_SECRET = "GU6RrUGnP2KId7WFSrMULPus"
+            eventregister_model = EventRegisterUser.objects.all()
+            serializer = EventRegisterSerializer(eventregister_model, many=True)
+            
+            KEY_ID = "rzp_test_2y68LXTdn3DKK9"
+            KEY_SECRET = "GU6RrUGnP2KId7WFSrMULPus"
 
-        client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
-        amount = request.data.get('amount')
-        currency = "INR"
+            client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
+            amount = request.data.get('amount')
+            currency = "INR"
 
+            print("Amount type++++++++++++++++++++++++++++++++++++++++++++", type(int(amount)))
+            
 
-        data = {"amount": amount, "currency": currency}
-        event_register = client.order.create(data=data)
-        print(event_register["id"])
-
-
-        if TotallRegisterUser <= EventCapacity:
-            EventRegisterUser.objects.create(
-                user = request.user,
-                first_name = request.data.get('first_name'),
-                last_name = request.data.get('last_name'),
-                email = request.data.get('email'),
-                phone_number = request.data.get('phone_number'),
-
-                smart_card_number = request.data.get('smart_card_number'),
-                address = request.data.get('address'),
-
-                pin_code = request.data.get('pin_code'),
-                city = request.data.get('pin_code'),
-                state = request.data.get('state'),
-                country = request.data.get('country'),
+            data = {"amount": int(amount)*100, "currency": currency}
+            event_register = client.order.create(data=data)
+            print(event_register["id"])
 
 
+            if TotallRegisterUser <= EventCapacity:
+                EventRegisterUser.objects.create(
+                    user = request.user,
+                    first_name = request.data.get('first_name'),
+                    last_name = request.data.get('last_name'),
+                    email = request.data.get('email'),
+                    phone_number = request.data.get('phone_number'),
+
+                    smart_card_number = request.data.get('smart_card_number'),
+                    address = request.data.get('address'),
+
+                    pin_code = request.data.get('pin_code'),
+                    city = request.data.get('pin_code'),
+                    state = request.data.get('state'),
+                    country = request.data.get('country'),
+
+                    amount=event_register["amount"],
+                    payment_id=event_register["id"],
+                    order_date=event_register["created_at"],
+                    is_pay = True
+                )
+
+                #EventRegisterUser.user.add(user)
+
+                return Response({
+                        "message":"Thank For Registration",
+                        "donation details": int(event_register["amount"])/100,
+                        "amount":event_register["amount"],
+                        "payment_id":event_register["id"],
+                        "order_date":event_register["created_at"],
+                        "is_pay":True
+                    }
+                    
+                )
                 
-                amount=event_register["amount"],
-                payment_id=event_register["id"],
-                order_date=event_register["created_at"],
-                is_pay = True
-            )
-
             return Response({
-                    "message":"Thank For Registration",
-                    "donation details": event_register
+                    "message":"You can't register at the moment, event registration capacity is already over."
                 }
                 
             )
-        
-        return Response({
-                "message":"You can't register at the moment, event registration capacity is already over."
-            }
-            
-        )
+        except Exception as e:
+             return Response({
+                    "message":"somthing wrong with payment",
+                    "error":e
+                }
+                
+            )
             
 
        

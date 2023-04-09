@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 class Banner(models.Model):
@@ -21,7 +22,9 @@ class LatestVideo(models.Model):
 class Initiative(models.Model):
     title = models.CharField(max_length=350, null=True, blank=False)
     sub_title = models.CharField(max_length=350, null=True, blank=True)
-    img = models.ImageField(blank=False, null=True, upload_to="home/initiative")
+    img = models.ImageField(blank=False, null=True)
+
+    #details = RichTextUploadingField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.pk}.{self.title}" 
