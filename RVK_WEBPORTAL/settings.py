@@ -249,3 +249,4 @@ EMAIL_HOST_PASSWORD = 'yvjhqdlcujftbczh'#leave here your genuine password of you
 EMAIL_USE_TLS = True#oke
 
 
+TIME_ZONE = 'Asia/Kolkata'
