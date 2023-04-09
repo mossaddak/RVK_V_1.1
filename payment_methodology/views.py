@@ -124,5 +124,4 @@ class DonateView(APIView):
                 "message":"somthing wrong with payment",
                 "error":e
             }
-            
         )

@@ -135,19 +135,15 @@ class EventRegisterViewSet(APIView):
                     "message":"somthing wrong with payment",
                     "error":e
                 }
-                
             )
             
-
-       
-
-
-
         
 
     def get(self,request):
         eventregister_model = EventRegisterUser.objects.all()
         serializer = EventRegisterSerializer(eventregister_model, many=True)
+
+
         if request.user.groups.filter(name='Finance Department').exists():
             return Response(
                 {
