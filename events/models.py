@@ -22,7 +22,7 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
     start = models.DateTimeField(verbose_name="Event Start Time", null=True)
-    end = models.DateTimeField(verbose_name="Event End Time", null=True)
+    #end = models.DateTimeField(verbose_name="Event End Time", null=True)
 
     is_event_complete = models.BooleanField(verbose_name="Is event completed?", null=True, default=False)
 
