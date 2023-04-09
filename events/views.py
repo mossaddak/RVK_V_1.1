@@ -51,7 +51,7 @@ class EventRegisterViewSet(APIView):
 
 
     def post(self, request):
-        TotallRegisterUser = EventRegisterUser.objects.all().count()
+        #TotallRegisterUser = EventRegisterUser.objects.all().count()
         EventCapacity = Event.objects.last().capacity
 
         
@@ -75,9 +75,12 @@ class EventRegisterViewSet(APIView):
 
             event_id = request.data.get('event_id')
             all_events = Event.objects.all()
+
             
             
             event_for_register = get_object_or_404(all_events, pk=event_id)
+            
+            
 
             print("Amount type++++++++++++++++++++++++++++++++++++++++++++", type(int(amount)))
             print("event_for_register++++++++++++++++++++++++++++++++++++++++++++", event_for_register)
@@ -88,7 +91,7 @@ class EventRegisterViewSet(APIView):
             event_register = client.order.create(data=data)
             print(event_register["id"])
 
-
+            TotallRegisterUser = event_for_register.user.all().count()
             if TotallRegisterUser <= EventCapacity:
                 EventRegisterUser.objects.create(
                     event = event_for_register,
@@ -111,6 +114,12 @@ class EventRegisterViewSet(APIView):
                     order_date=event_register["created_at"],
                     is_pay = True
                 )
+
+                event_for_register.user.add(request.user)
+
+                print("all user=================================================",event_for_register.user.all().count())
+
+
 
                 #EventRegisterUser.user.add(user)
 
