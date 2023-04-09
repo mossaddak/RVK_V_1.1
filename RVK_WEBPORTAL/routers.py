@@ -17,10 +17,13 @@ from careers.views import (
 from volunteers.views import VolunteerViewset
 from contacts.views import ContactViewset
 from announcements.views import AnnouncementViewset
+
+#home
 from home.views import (
     BannerModelView,
     LatestVideoModelView,
     InitiativeVideoModelView,
+    NewsShelterViewset
 )
 
 from password_recover.views import (
@@ -73,9 +76,12 @@ router.register(r'careers',CareerViewset)
 router.register(r'volunteers',VolunteerViewset)
 router.register(r'contact',ContactViewset)
 router.register(r'announcements',AnnouncementViewset)
-router.register(r'banner',BannerModelView)
+
+#home
+router.register(r'home_banner',BannerModelView)
 router.register(r'latestvideo',LatestVideoModelView)
 router.register(r'initiative',InitiativeVideoModelView)
+router.register(r'newsshelter',NewsShelterViewset)
 
 #router.register(r'donate',DonationView)
 
@@ -85,7 +91,7 @@ router.register(r'career_desc',CareerDescModelView)
 
 router.register(r'rvkaboutbanner',RvkAboutBannerView)
 router.register(r'rkbaboutdescription',RvkAboutDescriptionView)
-router.register(r'quicklinkview',QuickLinksView)
+router.register(r'quicklinkview',QuickLinksView) 
 
 router.register(r'premrawataboutbanner',PremRawatAboutBannerView)
 router.register(r'premrawatdescription',PremRawattDescriptionView)

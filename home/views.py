@@ -12,14 +12,21 @@ from rest_framework.viewsets import(
 from .models import(
     Banner,
     LatestVideo,
-    Initiative
+    Initiative,
+    NewsShelter
 
 )
 from .serializer import(
     BannerSerializer,
     LatestVideoSerializer,
     InitiativeSerializer,
+    NewsShelterSerializer
 )
+
+from RVK_WEBPORTAL.permissions import(
+    IsContentEditor
+)
+
 
 class ReadOnlyPermission(BasePermission):
     def has_permission(self, request, view):
@@ -30,7 +37,7 @@ class BannerModelView(ModelViewSet):
 
     serializer_class = BannerSerializer
     queryset = Banner.objects.all()
-    permission_classes = [ReadOnlyPermission]
+    permission_classes = [IsContentEditor]
 
     print("BannerSerializer=====================================")
 
@@ -40,10 +47,16 @@ class LatestVideoModelView(ModelViewSet):
 
     serializer_class = LatestVideoSerializer
     queryset = LatestVideo.objects.all()
-    permission_classes = [ReadOnlyPermission]
+    permission_classes = [IsContentEditor]
 
 class InitiativeVideoModelView(ModelViewSet):
 
     serializer_class = InitiativeSerializer
     queryset = Initiative.objects.all()
-    permission_classes = [ReadOnlyPermission]
+    permission_classes = [IsContentEditor]
+
+class NewsShelterViewset(ModelViewSet):
+
+    serializer_class = NewsShelterSerializer
+    queryset = NewsShelter.objects.all()
+    permission_classes = [IsContentEditor]

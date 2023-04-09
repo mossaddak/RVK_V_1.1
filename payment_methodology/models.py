@@ -8,7 +8,7 @@ from accounts.models import(
 
 # Create your models here.
 class DonationModel(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name="Donation")
 
     first_name = models.CharField(max_length=250,null=True, verbose_name="First Name")
     last_name = models.CharField(max_length=250, null=True, verbose_name="Last Name")

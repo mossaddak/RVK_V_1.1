@@ -6,6 +6,10 @@ from rest_framework.exceptions import PermissionDenied
 from django.contrib.auth.models import Group
 from events.models import Event
 
+from payment_methodology.serializer import(
+    DonationSerializer
+)
+
 
 User = get_user_model()
 
@@ -86,6 +90,8 @@ class EventSerializer(serializers.ModelSerializer):
 class UserGetSerializer(serializers.ModelSerializer):
     profile_picture = serializers.SerializerMethodField()
     dob = serializers.SerializerMethodField()
+
+    Donation = DonationSerializer(many=True, read_only=True)
     
     class Meta:
         model = get_user_model()

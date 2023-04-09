@@ -9,8 +9,6 @@ from accounts.serializers import(
     UserSerializer
 )
 
-
-
 class EventSerializer(ModelSerializer):
     
     class Meta:
@@ -20,8 +18,8 @@ class EventSerializer(ModelSerializer):
 class EventRegisterSerializer(ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
-        model = EventRegisterUser
-        fields = '__all__'
+        model = EventRegisterUser 
+        fields = '__all__' 
 
 
 

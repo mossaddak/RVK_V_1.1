@@ -19,6 +19,19 @@ class LatestVideo(models.Model):
     class Meta:
         verbose_name_plural = 'Latest Videos'
 
+
+INITIATIVE_CATEGORY =(
+    ("1", "One"),
+    ("2", "Two"),
+    ("3", "Three"),
+    ("4", "Four"),
+    ("5", "Five"),
+)
+
+# class Initiative(models.Model):
+#     title = forms.ChoiceField(choices = GEEKS_CHOICES)
+
+
 class Initiative(models.Model):
     title = models.CharField(max_length=350, null=True, blank=False)
     sub_title = models.CharField(max_length=350, null=True, blank=True)
@@ -27,6 +40,15 @@ class Initiative(models.Model):
     #details = RichTextUploadingField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.pk}.{self.title}" 
+        return f"{self.pk}.{self.title}"
+    
+class NewsShelter(models.Model):
+    email = models.EmailField(max_length=254)
+
+    def __str__(self):
+        return f"{self.pk}.{self.email}"
+    
+    class Meta:
+        verbose_name_plural = 'News Shelter'
 
     
