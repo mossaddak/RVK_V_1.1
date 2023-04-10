@@ -12,14 +12,12 @@ from rest_framework.viewsets import(
 from .models import(
     Banner,
     LatestVideo,
-    Initiative,
     NewsShelter
 
 )
 from .serializer import(
     BannerSerializer,
     LatestVideoSerializer,
-    InitiativeSerializer,
     NewsShelterSerializer
 )
 
@@ -53,11 +51,6 @@ class LatestVideoModelView(ModelViewSet):
     queryset = LatestVideo.objects.all()
     permission_classes = [IsContentEditor]
 
-class InitiativeVideoModelView(ModelViewSet):
-
-    serializer_class = InitiativeSerializer
-    queryset = Initiative.objects.all()
-    permission_classes = [IsContentEditor]
 
 
 class NewsShelterViewset(ModelViewSet):

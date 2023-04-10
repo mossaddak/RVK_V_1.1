@@ -22,7 +22,6 @@ from announcements.views import AnnouncementViewset
 from home.views import (
     BannerModelView,
     LatestVideoModelView,
-    InitiativeVideoModelView,
     NewsShelterViewset
 )
 
@@ -57,6 +56,14 @@ from events.views import(
     EventRegisterViewSet
 )
 
+#initiative
+from initiative.views import(
+    HumanitarianBottomSectionsView,
+    HumanitarianTopSectionView,
+    PeaceEducationProgramTopSectionView
+
+)
+
 
 
 
@@ -80,7 +87,6 @@ router.register(r'announcements',AnnouncementViewset)
 #home
 router.register(r'home_banner',BannerModelView)
 router.register(r'latestvideo',LatestVideoModelView)
-router.register(r'initiative',InitiativeVideoModelView)
 router.register(r'newsshelter',NewsShelterViewset)
 
 #router.register(r'donate',DonationView)
@@ -100,7 +106,10 @@ router.register(r'mediabannerview',BannerView)
 router.register(r'gallerycategory',GalleryCategoryView)
 router.register(r'mediaview',MediaView)
 
-#payment
+#initiative
+router.register(r'humanitarian-top',HumanitarianTopSectionView)
+router.register(r'humanitarian-bottom',HumanitarianBottomSectionsView)
+router.register(r'peace-education-program-top',PeaceEducationProgramTopSectionView)
 
 
 

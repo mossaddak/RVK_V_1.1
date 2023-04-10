@@ -87,13 +87,13 @@ INSTALLED_APPS = [
     'django_razorpay',
     
     'payment_methodology',
-
-
     'password_recover',
 
     #about
     'about',
-    'about_prem_rawat'
+    'about_prem_rawat',
+
+    "initiative",
     
 ]
 

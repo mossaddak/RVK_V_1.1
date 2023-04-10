@@ -2,7 +2,6 @@ from rest_framework.serializers import ModelSerializer
 from .models import(
     Banner,
     LatestVideo,
-    Initiative,
     NewsShelter
 )
 
@@ -15,11 +14,6 @@ class LatestVideoSerializer(ModelSerializer):
     class Meta:
         model = LatestVideo
         fields = "__all__" 
-
-class InitiativeSerializer(ModelSerializer):
-    class Meta:
-        model = Initiative
-        fields = "__all__"
 
 class NewsShelterSerializer(ModelSerializer):
     class Meta:

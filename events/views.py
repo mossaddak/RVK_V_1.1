@@ -54,12 +54,6 @@ class EventRegisterViewSet(APIView):
         #TotallRegisterUser = EventRegisterUser.objects.all().count()
         EventCapacity = Event.objects.last().capacity
 
-        
-
-        # print("Capacity======================================",Event.objects.first().capacity)
-
-        # print("Event=============================================",TotallRegisterUser)
-
         try:
 
             eventregister_model = EventRegisterUser.objects.all()
@@ -110,12 +104,6 @@ class EventRegisterViewSet(APIView):
                             city = request.data.get('pin_code'),
                             state = request.data.get('state'),
                             country = request.data.get('country'),
-
-                            # amount=event_register["amount"],
-                            # payment_id=event_register["id"],
-                            # order_date=event_register["created_at"],
-
-                            
                             is_pay = False
                         )
 
@@ -166,7 +154,6 @@ class EventRegisterViewSet(APIView):
                         )
 
                         event_for_register.user.add(request.user)
-
 
                         return Response({
                                 "message":"Thank For Registration",

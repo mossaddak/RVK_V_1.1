@@ -32,15 +32,15 @@ INITIATIVE_CATEGORY =(
 #     title = forms.ChoiceField(choices = GEEKS_CHOICES)
 
 
-class Initiative(models.Model):
-    title = models.CharField(max_length=350, null=True, blank=False)
-    sub_title = models.CharField(max_length=350, null=True, blank=True)
-    img = models.ImageField(blank=False, null=True)
+# class Initiative(models.Model):
+#     title = models.CharField(max_length=350, null=True, blank=False)
+#     sub_title = models.CharField(max_length=350, null=True, blank=True)
+#     img = models.ImageField(blank=False, null=True)
 
-    #details = RichTextUploadingField(blank=True, null=True)
+#     #details = RichTextUploadingField(blank=True, null=True)
 
-    def __str__(self):
-        return f"{self.pk}.{self.title}"
+#     def __str__(self):
+#         return f"{self.pk}.{self.title}"
     
 class NewsShelter(models.Model):
     email = models.EmailField(max_length=254)
