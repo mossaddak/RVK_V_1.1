@@ -55,7 +55,7 @@ class EventRegisterUser(models.Model):
     country = models.CharField(max_length=250, null=True, verbose_name="Country")
 
     #payment details
-    card_details = models.CharField(max_length=20, null=True, blank=False)
+    card_details = models.CharField(max_length=20, null=True)
     amount = models.CharField(max_length=250, null=True)
     payment_id = models.CharField(max_length=100, null=True)
     order_date = models.DateTimeField(auto_now=True, null=True)

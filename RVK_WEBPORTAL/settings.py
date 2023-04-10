@@ -16,7 +16,7 @@ import os
 from datetime import timedelta
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths inside the project like this: BASE_DIR  / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -243,6 +243,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 #password reset purpose
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'#oke
 EMAIL_HOST = 'smtp.gmail.com'#oke
+
 EMAIL_PORT = '587'#oke
 EMAIL_HOST_USER = 'mossaddak15-2413@diu.edu.bd'#leave here your genuine email
 EMAIL_HOST_PASSWORD = 'yvjhqdlcujftbczh'#leave here your genuine password of your email. keep it in mind, as the password should in encrypted condition 

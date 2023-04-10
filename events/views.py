@@ -65,12 +65,10 @@ class EventRegisterViewSet(APIView):
             eventregister_model = EventRegisterUser.objects.all()
             serializer = EventRegisterSerializer(eventregister_model, many=True)
             
-            KEY_ID = "rzp_test_2y68LXTdn3DKK9"
-            KEY_SECRET = "GU6RrUGnP2KId7WFSrMULPus"
+            
 
-            client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
-            amount = request.data.get('amount')
-            currency = "INR"
+            is_pay = request.data.get('is_pay')
+            
 
 
             event_id = request.data.get('event_id')
@@ -79,17 +77,10 @@ class EventRegisterViewSet(APIView):
             
             
             event_for_register = get_object_or_404(all_events, pk=event_id)
-            
-            
-
-            print("Amount type++++++++++++++++++++++++++++++++++++++++++++", type(int(amount)))
-            print("event_for_register++++++++++++++++++++++++++++++++++++++++++++", event_for_register)
+                        
 
             
-
-            data = {"amount": int(amount)*100, "currency": currency}
-            event_register = client.order.create(data=data)
-            print(event_register["id"])
+            #print(event_register["id"])
 
             TotallRegisterUser = event_for_register.user.all().count()
 
@@ -102,51 +93,94 @@ class EventRegisterViewSet(APIView):
                 )
             else:
                 if TotallRegisterUser <= EventCapacity:
-                    EventRegisterUser.objects.create(
-                        event = event_for_register,
-                        user = request.user,
-                        first_name = request.data.get('first_name'),
-                        last_name = request.data.get('last_name'),
-                        email = request.data.get('email'),
-                        phone_number = request.data.get('phone_number'),
 
-                        smart_card_number = request.data.get('smart_card_number'),
-                        address = request.data.get('address'),
+                    if is_pay == "false":
+                        EventRegisterUser.objects.create(
+                            event = event_for_register,
+                            user = request.user,
+                            first_name = request.data.get('first_name'),
+                            last_name = request.data.get('last_name'),
+                            email = request.data.get('email'),
+                            phone_number = request.data.get('phone_number'),
 
-                        pin_code = request.data.get('pin_code'),
-                        city = request.data.get('pin_code'),
-                        state = request.data.get('state'),
-                        country = request.data.get('country'),
+                            smart_card_number = request.data.get('smart_card_number'),
+                            address = request.data.get('address'),
 
-                        amount=event_register["amount"],
-                        payment_id=event_register["id"],
-                        order_date=event_register["created_at"],
-                        is_pay = True
-                    )
+                            pin_code = request.data.get('pin_code'),
+                            city = request.data.get('pin_code'),
+                            state = request.data.get('state'),
+                            country = request.data.get('country'),
 
-                    event_for_register.user.add(request.user)
+                            # amount=event_register["amount"],
+                            # payment_id=event_register["id"],
+                            # order_date=event_register["created_at"],
 
-                    print("all user=================================================",event_for_register.user.all().count())
+                            
+                            is_pay = False
+                        )
+
+                        event_for_register.user.add(request.user)
 
 
+                        return Response({
+                                "message":"Thank For Registration",
+                                "is_pay":False
 
-                    #EventRegisterUser.user.add(user)
+                                
+                            }
+                            
+                        )
+                    elif is_pay == "true":
 
-                    return Response({
-                            "message":"Thank For Registration",
-                            "donation details": int(event_register["amount"])/100,
-                            "amount":event_register["amount"],
-                            "payment_id":event_register["id"],
-                            "order_date":event_register["created_at"],
-                            "is_pay":True
-                        }
-                        
-                    )
+                        KEY_ID = "rzp_test_2y68LXTdn3DKK9"
+                        KEY_SECRET = "GU6RrUGnP2KId7WFSrMULPus"
+
+                        client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
+                        currency = "INR"
+                        amount = request.data.get('amount')
+                        data = {"amount": int(amount)*100, "currency": currency}
+                        event_register = client.order.create(data=data)
+
+                        EventRegisterUser.objects.create(
+                            event = event_for_register,
+                            user = request.user,
+                            first_name = request.data.get('first_name'),
+                            last_name = request.data.get('last_name'),
+                            email = request.data.get('email'),
+                            phone_number = request.data.get('phone_number'),
+
+                            smart_card_number = request.data.get('smart_card_number'),
+                            address = request.data.get('address'),
+
+                            pin_code = request.data.get('pin_code'),
+                            city = request.data.get('pin_code'),
+                            state = request.data.get('state'),
+                            country = request.data.get('country'),
+                            card_details = request.data.get('card_details'),
+
+                            amount=event_register["amount"],
+                            payment_id=event_register["id"],
+                            order_date=event_register["created_at"],
+
+                            is_pay = True
+                        )
+
+                        event_for_register.user.add(request.user)
+
+
+                        return Response({
+                                "message":"Thank For Registration",
+                                "donation details": int(event_register["amount"])/100,
+                                "amount":event_register["amount"],
+                                "payment_id":event_register["id"],
+                                "card_details":request.data.get('card_details'),
+                                "is_pay":True
+                            }
+                        )
                     
                 return Response({
                         "message":"You can't register at the moment, event registration capacity is already over."
                     }
-                    
                 )
         except Exception as e:
              return Response({
