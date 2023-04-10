@@ -60,7 +60,12 @@ from events.views import(
 from initiative.views import(
     HumanitarianBottomSectionsView,
     HumanitarianTopSectionView,
-    PeaceEducationProgramTopSectionView
+    PeaceEducationProgramTopSectionView,
+    PeaceEducationProgramSecondSectionView,
+    PeaceEducationProgramThiredSectionView,
+    PeaceEducationProgramFourthSectionSectionView,
+    PeaceEducationProgramAndEducationFirstSectionView,
+    PeaceEducationProgramAndEducationSecondSectionView
 
 )
 
@@ -110,6 +115,12 @@ router.register(r'mediaview',MediaView)
 router.register(r'humanitarian-top',HumanitarianTopSectionView)
 router.register(r'humanitarian-bottom',HumanitarianBottomSectionsView)
 router.register(r'peace-education-program-top',PeaceEducationProgramTopSectionView)
+router.register(r'peace-education-program-second',PeaceEducationProgramSecondSectionView)
+
+router.register(r'peace-education-program-thired',PeaceEducationProgramThiredSectionView)
+router.register(r'peace-education-program-fourth',PeaceEducationProgramFourthSectionSectionView)
+router.register(r'peace-education-program-and-education-first',PeaceEducationProgramAndEducationFirstSectionView)
+router.register(r'peace-education-program-and-education-second',PeaceEducationProgramAndEducationSecondSectionView)
 
 
 

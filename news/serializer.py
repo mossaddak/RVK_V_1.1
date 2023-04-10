@@ -11,6 +11,7 @@ class NewsCategorySerializer(ModelSerializer):
 
 
 class NewsSerializer(ModelSerializer):
+    news_category = NewsCategorySerializer(read_only=True)
     class Meta:
         model = News
         fields = "__all__" 

@@ -27,8 +27,12 @@ from django.core.mail import EmailMessage
 
 
 
-KEY_ID = "rzp_test_2y68LXTdn3DKK9"
-KEY_SECRET = "GU6RrUGnP2KId7WFSrMULPus"
+# KEY_ID = "rzp_test_2y68LXTdn3DKK9"
+# KEY_SECRET = "GU6RrUGnP2KId7WFSrMULPus"
+
+
+KEY_ID = "rzp_test_Agj8QPGZbIlq92"
+KEY_SECRET = "zzqu7LcAUJaePKW32GjesxA2"
 
 
 client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))

@@ -4,7 +4,11 @@ from .models import(
     HumanitarianTopSection,
     HumanitarianBottomSections,
     PeaceEducationProgramTopSection,
-    PeaceEducationProgramSecondSection
+    PeaceEducationProgramSecondSection,
+    PeaceEducationProgramThiredSection,
+    PeaceEducationProgramFourthSection,
+    PeaceEducationProgramAndEducationFirstSection,
+    PeaceEducationProgramAndEducationSecondSection
 )
 
 class HumanitarianTopSectionSerializer(serializers.ModelSerializer):
@@ -30,6 +34,30 @@ class PeaceEducationProgramSecondSectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PeaceEducationProgramSecondSection
+        fields = "__all__"
+
+class PeaceEducationProgramThiredSectionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PeaceEducationProgramThiredSection
+        fields = "__all__"
+
+class PeaceEducationProgramFourthSectionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PeaceEducationProgramFourthSection
+        fields = "__all__"
+
+class PeaceEducationProgramAndEducationFirstSectionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PeaceEducationProgramAndEducationFirstSection
+        fields = "__all__"
+
+class PeaceEducationProgramAndEducationSecondSectionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PeaceEducationProgramAndEducationSecondSection
         fields = "__all__"
 
 
