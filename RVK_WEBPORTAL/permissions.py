@@ -63,11 +63,6 @@ class RegistrationLimit(permissions.BasePermission):
         perm = request.user.groups.filter(name='Finance Department').exists()
         EvenRegisterUser = EventRegisterUser.objects.all()
         
-        #registerCapacity = Event.objects.filter(capacity__gt="capacity")
-
-        registerCapacity = Event.objects.values_list('capacity', flat=True)
-        print("register=====================================================",EvenRegisterUser.count())
-        print("registerCapacity=====================================================", )
 
         if request.method in permissions.SAFE_METHODS or request.user.is_superuser or perm:
 
@@ -75,4 +70,14 @@ class RegistrationLimit(permissions.BasePermission):
             print("Permissions============================", perm)
             return True
         
-        return False 
+        return False
+    
+class AdminAccessOnlyOtherCanSee(BasePermission):
+    def has_permission(self, request, view):
+        if request.method == 'POST':
+            return True  # Allow any user to create a new object
+
+        
+        elif request.method in ['PUT', 'PATCH', 'DELETE']:
+            return request.user.is_superuser  # Allow only superusers to update objects
+        return True 

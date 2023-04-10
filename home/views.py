@@ -26,7 +26,11 @@ from .serializer import(
 from RVK_WEBPORTAL.permissions import(
     IsContentEditor
 )
+from rest_framework import permissions
 
+from RVK_WEBPORTAL.permissions import(
+    AdminAccessOnlyOtherCanSee
+)
 
 class ReadOnlyPermission(BasePermission):
     def has_permission(self, request, view):
@@ -55,8 +59,9 @@ class InitiativeVideoModelView(ModelViewSet):
     queryset = Initiative.objects.all()
     permission_classes = [IsContentEditor]
 
+
 class NewsShelterViewset(ModelViewSet):
 
     serializer_class = NewsShelterSerializer
     queryset = NewsShelter.objects.all()
-    permission_classes = [IsContentEditor]
+    permission_classes = [AdminAccessOnlyOtherCanSee]
