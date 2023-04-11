@@ -20,7 +20,7 @@ class News(models.Model):
     news_document = models.FileField(null=True, blank=False, verbose_name="news document")
     author = models.CharField(max_length=250, null=True)
 
-    created_at = models.DateTimeField(auto_now=True, null=True)
+    created_at = models.DateTimeField( null=True)
 
     def __str__(self):
         return f"{self.pk}.{self.title}"
