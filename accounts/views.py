@@ -72,8 +72,8 @@ class AccountViewSet(viewsets.ModelViewSet):
             # check if link has already been used
 
             if user_verification.used == True:
-                    # send error
-                    return Response({"used": "Link has already been used"})
+                # send error
+                return Response({"used": "Link has already been used"})
             else:
                 user = user_verification.user
                 user.verified = True
